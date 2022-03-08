@@ -1,0 +1,10 @@
+<% pictures.in_groups_of(3) do |group| %>
+  <div class="row">
+    <% group.compact.each do |picture| %>
+      <div class="col-md-4  text-truncate">
+        <%#= "ここに画像が入る" %>
+        <h4><%= link_to picture.title, picture %></h4>
+      </div>
+    <% end %>
+  </div>
+<% end %>

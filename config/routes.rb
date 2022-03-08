@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'pictures/new'
+  get 'pictures/show'
   root to: 'toppages#index'
 
   get 'login', to: 'sessions#new'
@@ -6,4 +8,5 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   resources :users
+  resources :pictures, only: [:new, :create, :show]
 end
