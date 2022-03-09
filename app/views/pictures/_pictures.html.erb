@@ -2,7 +2,7 @@
   <div class="row">
     <% group.compact.each do |picture| %>
       <div class="col-md-4  text-truncate">
-        <%#= "ここに画像が入る" %>
+        <%= image_tag picture.picture.variant(resize_to_fill: [300, 300]), class: "img-fluid" if picture.picture.attached? %>
         <h4><%= link_to picture.title, picture %></h4>
       </div>
     <% end %>
