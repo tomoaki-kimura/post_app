@@ -8,6 +8,8 @@
   <div class="col-md-3">
     <p><b>Title: </b><%= @picture.title %></p>
     <p><b>Description: </b><%= @picture.description %></p>
+    <p><b>Latitude: </b><%= @picture.picture.metadata[:latitude] if @picture.picture.attached? %></p>
+    <p><b>Longitude: </b><%= @picture.picture.metadata[:longitude] if @picture.picture.attached? %></p>
     <p>
       <%= link_to 'Edit', edit_picture_path(@picture) %> |
       <%= link_to 'Destroy', @picture, data: { confirm: 'Are you sure?' }, method: :delete %> |
