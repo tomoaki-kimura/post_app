@@ -2,7 +2,11 @@
 
 <div class="row">
   <div class="col-md-9">
-    <%= image_tag @picture.picture.variant(resize_to_limit: [800, 800]), class: "img-fluid" if @picture.picture.attached? %>
+    <% if @picture.picture.attached? %>
+      <%= image_tag @picture.picture.variant(resize_to_limit: [800, 800]), class: "img-fluid" %>
+    <% else %>
+      <%= image_tag '/no_image.jpg', class: "img-fluid" %>
+    <% end %>
   </div>
 
   <div class="col-md-3">
@@ -17,3 +21,5 @@
     </p>
   </div>
 </div>
+
+<%= JSON.parse("https://aginfo.cgk.affrc.go.jp/ws/rgeocode.php?lat=34.655455555555555&lon=129.46676666666667&json") %>
