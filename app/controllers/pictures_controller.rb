@@ -1,7 +1,24 @@
 class PicturesController < ApplicationController
+  include FaradayConcern
 
   def show
     @picture = Picture.find(params[:id])
+    if @picture.picture.attached?
+      latitude = @picture.picture.metadata[:latitude]
+      longitude = @picture.picture.metadata[:longitude]
+      @agiinfo = reverse_geocode(latitude, longitude)[:result]
+    end
+    if @agiinfo && @agiinfo[:local].present?
+      @place = [
+        @agiinfo[:prefecture][:pname],
+        @agiinfo[:municipality][:mname],
+        @agiinfo[:local][0][:section],
+        @agiinfo[:local][0][:homenumber],
+        "付近"
+      ].join
+      @latitude = @picture.picture.metadata[:latitude]
+      @longitude = @picture.picture.metadata[:longitude]
+    end
   end
 
   def new
