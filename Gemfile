@@ -56,3 +56,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'foreman'
 
 gem 'exifr', '~> 1.3', '>= 1.3.9'
+
+gem 'faraday_middleware'
