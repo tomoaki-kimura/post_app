@@ -4,8 +4,8 @@ class PicturesController < ApplicationController
   def show
     @picture = Picture.find(params[:id])
     if @picture.picture.attached?
-      latitude = @picture.picture.metadata[:latitude]
-      longitude = @picture.picture.metadata[:longitude]
+      @latitude = @picture.picture.metadata[:latitude]
+      @longitude = @picture.picture.metadata[:longitude]
       @agiinfo = reverse_geocode(latitude, longitude)[:result]
     end
     if @agiinfo && @agiinfo[:local].present?
@@ -16,8 +16,12 @@ class PicturesController < ApplicationController
         @agiinfo[:local][0][:homenumber],
         "付近"
       ].join
-      @latitude = @picture.picture.metadata[:latitude]
-      @longitude = @picture.picture.metadata[:longitude]
+    elseif @agiinfo.present?
+      @place = [
+        @agiinfo[:prefecture][:pname],
+        @agiinfo[:municipality][:mname],
+        "付近"
+      ].join
     end
   end
 
