@@ -7,22 +7,9 @@ class PicturesController < ApplicationController
       @latitude = @picture.picture.metadata[:latitude]
       @longitude = @picture.picture.metadata[:longitude]
       @agiinfo = reverse_geocode(@latitude, @longitude)[:result]
+      @weather = get_weather(@agiinfo[:prefecture][:pcode]) if @agiinfo
     end
-    if @agiinfo && @agiinfo[:local].present?
-      @place = [
-        @agiinfo[:prefecture][:pname],
-        @agiinfo[:municipality][:mname],
-        @agiinfo[:local][0][:section],
-        @agiinfo[:local][0][:homenumber],
-        "付近"
-      ].join
-    elsif @agiinfo
-      @place = [
-        @agiinfo[:prefecture][:pname],
-        @agiinfo[:municipality][:mname],
-        "付近"
-      ].join
-    end
+    join_place_data
   end
 
   def new
@@ -66,5 +53,23 @@ class PicturesController < ApplicationController
 
   def picture_params
     params.require(:picture).permit(:title, :description, :picture)
+  end
+  
+  def join_place_data
+    if @agiinfo && @agiinfo[:local].present?
+      @place = [
+        @agiinfo[:prefecture][:pname],
+        @agiinfo[:municipality][:mname],
+        @agiinfo[:local][0][:section],
+        @agiinfo[:local][0][:homenumber],
+        "付近"
+      ].join
+    elsif @agiinfo
+      @place = [
+        @agiinfo[:prefecture][:pname],
+        @agiinfo[:municipality][:mname],
+        "付近"
+      ].join
+    end
   end
 end
