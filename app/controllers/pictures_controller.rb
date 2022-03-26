@@ -16,7 +16,7 @@ class PicturesController < ApplicationController
         @agiinfo[:local][0][:homenumber],
         "付近"
       ].join
-    elseif @agiinfo.present?
+    elsif @agiinfo.present?
       @place = [
         @agiinfo[:prefecture][:pname],
         @agiinfo[:municipality][:mname],
