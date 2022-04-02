@@ -2,6 +2,7 @@ class PicturesController < ApplicationController
   include FaradayConcern
   
   before_action :require_user_logged_in
+  before_action :set_picture_if_admin, only: %i( destroy )
   before_action :set_my_picture, only: %i( edit update destroy )
 
   def show
@@ -51,8 +52,12 @@ class PicturesController < ApplicationController
   
   private
   
+  def set_picture_if_admin
+    @picture = Picture.find(params[:id]) if current_user.admin?
+  end
+  
   def set_my_picture
-    @picture = current_user.pictures.find_by(id: params[:id])
+    @picture ||= current_user.pictures.find_by(id: params[:id])
     redirect_to root_url unless @picture
   end
 

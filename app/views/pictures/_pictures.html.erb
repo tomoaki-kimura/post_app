@@ -8,6 +8,9 @@
           <%= image_tag '/no_image_thumb.jpg', class: "img-fluid" %>
         <% end %>
         <h4><%= link_to picture.title, picture %></h4>
+        <% if current_user&.admin? %>
+          <%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-outline-danger mb-3" %>
+        <% end %>
       </div>
     <% end %>
   </div>
