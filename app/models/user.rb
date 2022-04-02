@@ -6,5 +6,5 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 4, maximum: 8 }, allow_blank: true
   has_secure_password
   
-  has_many :pictures
+  has_many :pictures, dependent: :destroy
 end

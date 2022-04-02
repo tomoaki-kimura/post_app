@@ -1,5 +1,8 @@
 class PicturesController < ApplicationController
   include FaradayConcern
+  
+  before_action :require_user_logged_in
+  before_action :set_my_picture, only: %i( edit update destroy )
 
   def show
     @picture = Picture.find(params[:id])
@@ -28,11 +31,9 @@ class PicturesController < ApplicationController
   end
   
   def edit
-    @picture = Picture.find(params[:id])
   end
   
   def update
-    @picture = Picture.find(params[:id])
     if @picture.update(picture_params)
       flash[:success] = "編集しました"
       redirect_to @picture
@@ -43,13 +44,17 @@ class PicturesController < ApplicationController
   end
   
   def destroy
-    @picture = Picture.find(params[:id])
     flash[:success] = "削除しました"
     @picture.destroy if @picture
     redirect_to root_url
   end
   
   private
+  
+  def set_my_picture
+    @picture = current_user.pictures.find_by(id: params[:id])
+    redirect_to root_url unless @picture
+  end
 
   def picture_params
     params.require(:picture).permit(:title, :description, :picture)

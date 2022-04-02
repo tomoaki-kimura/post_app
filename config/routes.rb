@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'pictures/new'
-  get 'pictures/show'
   root to: 'toppages#index'
 
   get 'login', to: 'sessions#new'
