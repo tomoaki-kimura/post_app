@@ -1,5 +1,5 @@
 {
-  "name": "post_app",
+  "name": "map_app",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
@@ -13,7 +13,11 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-cli": "~3",
     "webpack-dev-server": "~3"
+  },
+  "engines": {
+    "node": "12.14.1",
+    "npm": "6.13.6",
+    "yarn": "1.21.1"
   }
 }
