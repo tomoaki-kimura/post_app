@@ -59,3 +59,5 @@ gem 'foreman'
 gem 'exifr', '~> 1.3', '>= 1.3.9'
 
 gem 'faraday_middleware'
+
+gem "aws-sdk-s3", require: false
