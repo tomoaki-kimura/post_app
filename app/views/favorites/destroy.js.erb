@@ -1,0 +1,2 @@
+document.getElementById('#picture-button-<%= @picture.id %>').innerHTML = '<%=j render 'favorites/favorite_button', picture: @picture, prefix: "picture" %>'
+document.getElementById('#favorite_picture-button-<%= @picture.id %>').innerHTML = '<%=j render 'favorites/favorite_button', picture: @picture, prefix: "favorite_picture" %>'

@@ -10,7 +10,7 @@
         <% end %>
         <h4><%= link_to picture.title, picture %></h4>
         <% if logged_in? %>
-          <div class="mb-2">
+          <div class="mb-2" id="#<%= prefix %>-button-<%= picture.id %>">
             <%= render 'favorites/favorite_button', picture: picture, prefix: prefix %>
           </div>
         <% end %>
