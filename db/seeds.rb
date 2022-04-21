@@ -16,3 +16,9 @@ index = 0
     end
   end
 end
+
+(2..20).each.with_index(2) do |n, i|
+  user = User.find(n)
+  user.favorites.create!(picture_id: i / 2)
+  user.favorites.create!(picture_id: i / 2 + 1)
+end
