@@ -1,0 +1,17 @@
+<% if current_user.favorite_pictures.include?(picture) %>
+  <%= form_with(model: current_user.favorites.find_by(picture_id: picture.id),
+               method: :delete,
+               local: true,
+               id: "#{prefix}-#{picture.id}") do |f| %>
+    <%= hidden_field_tag(:picture_id, picture.id, id: "#{prefix}_id-#{picture.id}") %>
+    <%= f.submit "お気に入りを解除", class: "btn btn-sm btn-danger" %>
+  <% end %>
+<% else %>
+  <%= form_with(model: current_user.favorites.build,
+               mathod: :post,
+               local: true,
+               id: "#{prefix}-#{picture.id}") do |f| %>
+    <%= hidden_field_tag(:picture_id, picture.id, id: "#{prefix}_id-#{picture.id}") %>
+    <%= f.submit "お気に入り", class: "btn btn-sm btn-primary" %>
+  <% end %>
+<% end %>

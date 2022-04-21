@@ -7,8 +7,10 @@
 
 <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-primary" if current_user == @user  %>
 
-<h2>YourPictures</h2>
+<h2>このユーザーの投稿</h2>
 
-<%= render 'pictures/pictures', pictures: @pictures %>
+<%= render 'pictures/pictures', pictures: @pictures, prefix: 'picture' %>
 
+<h2>このユーザーがお気に入りした投稿</h2>
 
+<%= render 'pictures/pictures', pictures: @favorite_pictures, prefix: 'favorite_picture' %>
